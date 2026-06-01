@@ -2,6 +2,7 @@
 producto1.Precio = -100;
 producto1.Stock = -5;
 producto1.Nombre = "";vvvv
+vvv
 Producto producto2 = new Producto("Smartphone", 499.99, 20);
 
 Console.WriteLine("=== Producto 1 ===");
