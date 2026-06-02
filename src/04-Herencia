@@ -1,0 +1,110 @@
+﻿Producto producto1 = new ProductoFisico("Teclado", 45.99, 10,0.5);
+Producto producto2 = new ProductoDigital("Curso de C#", 19.99, 999, "MP4");
+
+Console.WriteLine("=== Producto 1 ===");
+Console.WriteLine(producto1.MostrarInfo());
+Console.WriteLine("\n=== Producto 2 ===");
+Console.WriteLine(producto2.MostrarInfo());
+class Producto
+{
+    public string Nombre { get;set;}="";
+
+    private double _precio = 0;
+    public double Precio
+    {
+        get{ return _precio; }
+        set
+        {
+            if (value >= 0)
+            {
+                _precio = value;
+            }
+            else
+            {
+                Console.WriteLine("El precio no puede ser negativo.");
+            }
+        }
+    }
+    private int _stock = 0;
+    public int Stock
+    {
+        get{ return _stock; }
+        set
+        {
+            if (value >= 0)
+            {
+                _stock = value;
+            }
+            else
+            {
+                Console.WriteLine("El stock no puede ser negativo.");
+            }
+        }
+    }
+
+    public Producto(string nombre, double precio, int stock)
+    {
+        this.Nombre = nombre;
+        this.Precio = precio;
+        this.Stock = stock;
+    }
+
+    public virtual string MostrarInfo()
+    {
+        string info = $"Producto: {Nombre}\nPrecio: ${Precio}\nStock: {Stock} unidades";
+        return info;
+    }
+
+}
+
+
+class ProductoFisico : Producto
+{
+    private double _pesoKg;
+    public double PesoKg
+    {
+        get { return _pesoKg; }
+        set
+        {
+            if (value >= 0)
+            {
+                _pesoKg = value;
+            }
+            else
+            {
+                Console.WriteLine("El peso no puede ser negativo.");
+            }
+        }
+    } 
+
+
+    public ProductoFisico(string nombre, double precio, int stock, double pesoKg) : base(nombre, precio, stock)
+    {
+        this.PesoKg = pesoKg;
+    }
+
+    public override string MostrarInfo()
+    {
+        string infoBase = base.MostrarInfo();
+        string infoCompleta = $"{infoBase}\nPeso: {PesoKg} kg";
+        return infoCompleta;
+    }
+}
+
+class ProductoDigital : Producto
+{
+    public string FormatoDescarga { get; set; }="pdf";
+
+    public ProductoDigital(string nombre, double precio, int stock, string formatoDescarga) : base(nombre, precio, stock)
+    {
+        this.FormatoDescarga = formatoDescarga;
+    }
+
+
+    public override  string MostrarInfo()
+    {
+        string infoBase = base.MostrarInfo();
+        string infoCompleta = $"{infoBase}\nFormato de Descarga: {FormatoDescarga}";
+        return infoCompleta;
+    }
+}

@@ -1,0 +1,26 @@
+﻿interface IDescuentable
+{
+    double AplicarDescuento(double porcentaje);
+}
+
+interface IImprimible
+{
+    void Imprimir();
+}
+
+// Una clase puede implementar múltiples interfaces
+class Producto : IDescuentable, IImprimible
+{
+    public string Nombre { get; set; } = "";
+    public double Precio { get; set; }
+
+    public double AplicarDescuento(double porcentaje)
+    {
+        return Precio - (Precio * porcentaje / 100);
+    }
+
+    public void Imprimir()
+    {
+        Console.WriteLine($"{Nombre}: ${Precio}");
+    }
+}
